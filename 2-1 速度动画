@@ -1,0 +1,64 @@
+<html>
+<head>
+<meta http-equiv=Content-Type content="text/html;charset=utf-8">
+	<title>js动画</title>
+<style type="text/css">
+body,div.span{
+	margin:0;
+	padding:0;
+}
+#div1{
+	width:200px;
+	height: 200px;
+	background: red;
+	left:-200;
+	top:0;
+	position: relative;
+}
+#div1 span{
+	width:20px;
+	height:50px;
+	background: blue;
+	left:200px;
+	top:75px;
+	position:absolute;
+}
+</style>	
+<script type="text/javascript">
+
+    window.onload=function(){
+	var odiv=document.getElementById('div1');
+	odiv.onmouseover=function(){
+		startMove(0);
+	}
+	odiv.onmouseout = function(){
+		startMove(-200);
+	}
+}
+var timer=null;
+function startMove(itarget){
+    clearInterval(timer);
+	var odiv=document.getElementById('div1');
+    timer = setInterval(function(){
+    	var speed = 0;
+    	if(odiv.offsetLeft>itarget)
+    	    speed=-10;
+        else
+        	speed=10;
+    	if(odiv.offsetLeft==itarget){
+    		clearInterval(timer);
+    	}
+    	else{
+    		odiv.style.left=odiv.offsetLeft+speed+'px'; //疑问：当出现的速度小于退出的速度时，鼠标一移走小篮筐也没了。   
+    	}
+    	
+    },30)
+}
+</script>
+</head>
+<body>
+   <div id="div1">
+   <span id="share">分享</span>
+</div>
+</body>
+</html>
